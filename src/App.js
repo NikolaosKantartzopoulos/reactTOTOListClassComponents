@@ -14,9 +14,7 @@ class App extends Component {
 	}
 	handleChange = (e) => {
 		this.setState({
-			task: {
-				text: e.target.value,
-			},
+			task: e.target.value,
 		});
 	};
 
