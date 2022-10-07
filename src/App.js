@@ -5,7 +5,11 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			task: { text: "" },
+			uniqueID: 1,
+			task: {
+				text: "",
+				taskID: 0,
+			},
 			tasks: [],
 		};
 
@@ -13,17 +17,33 @@ class App extends Component {
 		this.onSubmitTask = this.onSubmitTask.bind(this);
 	}
 	handleChange = (e) => {
-		this.setState({
-			task: e.target.value,
-		});
+		this.setState(
+			{
+				task: { text: e.target.value, taskID: this.state.task.taskID },
+			},
+			() => {
+				console.log(this.state.uniqueID);
+			}
+		);
 	};
 
 	onSubmitTask = (e) => {
 		e.preventDefault();
-		this.setState({
-			tasks: this.state.tasks.concat(this.state.task),
-			task: { text: "" },
-		});
+		// console.log(`onSubmitTask started with ${this.state.tasks}`);
+		this.setState(
+			(state) => ({
+				tasks: this.state.tasks.concat(this.state.task),
+				task: {
+					text: "",
+					taskID: this.state.uniqueID,
+				},
+				uniqueID: this.state.uniqueID + 1,
+			}),
+			() => {
+				console.log(this.state.tasks);
+				console.log(this.state.uniqueID);
+			}
+		);
 	};
 
 	render() {
