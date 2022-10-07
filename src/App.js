@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Overview from "./components/Overview";
+import delpng from "./delete-forever.png";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -15,6 +17,7 @@ class App extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.onSubmitTask = this.onSubmitTask.bind(this);
+		this.deleteTask = this.deleteTask.bind(this);
 	}
 	handleChange = (e) => {
 		this.setState(
@@ -29,6 +32,7 @@ class App extends Component {
 
 	onSubmitTask = (e) => {
 		e.preventDefault();
+		if (this.state.task.text == "") return null;
 		// console.log(`onSubmitTask started with ${this.state.tasks}`);
 		this.setState(
 			(state) => ({
@@ -46,6 +50,17 @@ class App extends Component {
 		);
 	};
 
+	deleteTask = (e) => {
+		this.setState((state) => ({
+			uniqueID: 1,
+			task: {
+				text: "",
+				taskID: 0,
+			},
+			tasks: [],
+		}));
+	};
+
 	render() {
 		const { task, tasks } = this.state;
 		return (
@@ -57,6 +72,7 @@ class App extends Component {
 						type="text"
 						id="taskInput"
 					/>
+					<img src={delpng} onClick={this.deleteTask} />
 					<button type="submit" task={"Submit"}>
 						Add task
 					</button>
