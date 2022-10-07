@@ -20,33 +20,26 @@ class App extends Component {
 		this.deleteTask = this.deleteTask.bind(this);
 	}
 	handleChange = (e) => {
-		this.setState(
-			{
-				task: { text: e.target.value, taskID: this.state.task.taskID },
-			},
-			() => {
-				console.log(this.state.uniqueID);
-			}
-		);
+		this.setState({
+			task: { text: e.target.value, taskID: this.state.task.taskID },
+		});
 	};
 
 	onSubmitTask = (e) => {
 		e.preventDefault();
 		if (this.state.task.text == "") return null;
-		// console.log(`onSubmitTask started with ${this.state.tasks}`);
 		this.setState(
-			(state) => ({
+			() => ({
 				tasks: this.state.tasks.concat(this.state.task),
 				task: {
 					text: "",
 					taskID: this.state.uniqueID,
 				},
 				uniqueID: this.state.uniqueID + 1,
-			}),
-			() => {
-				console.log(this.state.tasks);
-				console.log(this.state.uniqueID);
-			}
+			})
+			// () => {
+			// 	console.log(this.state.tasks);
+			// }
 		);
 	};
 
@@ -60,6 +53,12 @@ class App extends Component {
 			tasks: [],
 		}));
 	};
+
+	handleDeleteOne(taskID) {
+		console.log(`This is the taskID:  ${taskID}`);
+		console.log(this.state.tasks);
+		let temp = [];
+	}
 
 	render() {
 		const { task, tasks } = this.state;
@@ -77,7 +76,7 @@ class App extends Component {
 						Add task
 					</button>
 				</form>
-				<Overview tasks={tasks} />
+				<Overview tasks={tasks} handleDeleteOne={this.handleDeleteOne} />
 			</div>
 		);
 	}
