@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Overview from "./components/Overview";
 import delpng from "./delete-forever.png";
+import "./style.css";
 
 class App extends Component {
 	constructor(props) {
@@ -56,15 +57,13 @@ class App extends Component {
 
 	handleDeleteOne(taskID) {
 		console.log(`This is the taskID:  ${taskID}`);
-		console.log(this.state.tasks);
-		let temp = [];
 	}
 
 	render() {
 		const { task, tasks } = this.state;
 		return (
-			<div>
-				<form onSubmit={this.onSubmitTask}>
+			<div className="main">
+				<form onSubmit={this.onSubmitTask} className="red">
 					<input
 						onChange={this.handleChange}
 						value={task.text}

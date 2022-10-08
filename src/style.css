@@ -1,0 +1,18 @@
+.red {
+  background-color: rgb(232, 158, 158);
+}
+
+.main {
+  margin: auto;
+  width: 960px;
+  height: clamp(400px, 80vh, 900px);
+  background-color: lightgrey;
+}
+
+.formatTask {
+  display: flex;
+  flex-flow: row;
+  gap: 100px;
+  width: 300px;
+  justify-content: space-between;
+}
